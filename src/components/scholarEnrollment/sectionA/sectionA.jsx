@@ -12,10 +12,8 @@ class SectionA extends React.Component {
                 <Card>
                     <CardHeader
                         title="Record A" />
-
-
                     <CardContent>
-                        <Grid container>
+                        <Grid container spacing={1}>
                             <Grid item xs={2}>
                                 <Grid container spacing={1}>
                                     <Grid item xs={12}>

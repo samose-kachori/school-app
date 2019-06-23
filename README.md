@@ -66,3 +66,22 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+#### Reference
+- [Material table](https://material-table.com/#/docs/get-started)
+- [React Components](https://github.com/brillout/awesome-react-components)
+- [React Bootstrap](https://react-bootstrap.github.io)
+- [React Bootstrap - Github](https://github.com/react-bootstrap/react-bootstrap)
+- [material-ui](https://material-ui.com/)
+- [material-ui - Github](https://github.com/mui-org/material-ui)
+- [react data grid](https://adazzle.github.io/react-data-grid/docs/quick-start)
+
+#### Github tools
+- [lucidchart-connector](https://github.com/marketplace/lucidchart-connector)
+- [leanboard](https://github.com/marketplace/leanboard)
+- [zube](https://github.com/marketplace/zube)
+- [teamhub](https://github.com/marketplace/teamhub)
+
+
+- [Documentation](https://paper.dropbox.com/)
+- [web design tool by Google](https://webdesigner.withgoogle.com/)
