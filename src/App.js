@@ -1,10 +1,11 @@
 import React from 'react';
-import ScholarEnrollment from "./components/scholarEnrollment/scholarEnrollment";
+//import AgGrid from "./components/AgGrid/AgGrid";
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   return (
     <div className="App">
-        <ScholarEnrollment/>
+        <Dashboard/>
     </div>
   );
 }

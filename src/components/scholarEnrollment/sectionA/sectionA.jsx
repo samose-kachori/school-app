@@ -12,47 +12,47 @@ class SectionA extends React.Component {
                 <Card>
                     <CardHeader
                         title="Record A" />
-                    <CardContent>
-                        <Grid container spacing={1}>
-                            <Grid item xs={2}>
-                                <Grid container spacing={1}>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            id="date"
-                                            label="Date of Admission"
-                                            type="date"
-                                            defaultValue="2017-05-24"
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                            fullWidth
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            id="date"
-                                            label="Date of Removal"
-                                            type="date"
-                                            defaultValue="2017-05-24"
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                            fullWidth
-                                        />
+                        <CardContent>
+                            <Grid container spacing={1}>
+                                <Grid item xs={2}>
+                                    <Grid container spacing={1}>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                id="date"
+                                                label="Date of Admission"
+                                                type="date"
+                                                defaultValue="2017-05-24"
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                                fullWidth
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                id="date"
+                                                label="Date of Removal"
+                                                type="date"
+                                                defaultValue="2017-05-24"
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                                fullWidth
+                                            />
+                                        </Grid>
                                     </Grid>
                                 </Grid>
+                                <Grid item xs={10}>
+                                    <TextField
+                                        id="standard-multiline-static"
+                                        label="Cause of Removal"
+                                        multiline
+                                        fullWidth
+                                        rows="4"
+                                    />
+                                </Grid>
                             </Grid>
-                            <Grid item xs={10}>
-                                <TextField
-                                    id="standard-multiline-static"
-                                    label="Cause of Removal"
-                                    multiline
-                                    fullWidth
-                                    rows="4"
-                                />
-                            </Grid>
-                        </Grid>
-                    </CardContent>
+                        </CardContent>
                 </Card>
             </div>
         );
