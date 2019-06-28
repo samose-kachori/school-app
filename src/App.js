@@ -1,11 +1,11 @@
 import React from 'react';
 //import AgGrid from "./components/AgGrid/AgGrid";
-import Dashboard from './components/dashboard/Dashboard';
+import Menu from './components/drawer/Menu';
 
 function App() {
   return (
     <div className="App">
-        <Dashboard/>
+        <Menu/>
     </div>
   );
 }
