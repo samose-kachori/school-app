@@ -3,17 +3,24 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import DashboardIcon from '@material-ui/icons/TableChartRounded';
 import ClassIcon from '@material-ui/icons/DashboardRounded';
-import TeacherIcon from '@material-ui/icons/PeopleRounded';
 import StudentIcon from '@material-ui/icons/GrainRounded';
+import TeacherIcon from '@material-ui/icons/PeopleRounded';
 import LibraryIcon from '@material-ui/icons/LocalLibraryRounded';
 import TransportIcon from '@material-ui/icons/LocalShippingRounded';
 import ReportIcon from '@material-ui/icons/BarChartRounded';
-import RestaurantIcon from '@material-ui/icons/RestaurantRounded';
+import CafeteriaIcon from '@material-ui/icons/RestaurantRounded';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
 export const mainListItems = (
   <div>
+    <ListItem button>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <ListItemText primary="Dashboard" />
+    </ListItem>
     <ListItem button>
       <ListItemIcon>
         <StudentIcon />
@@ -40,15 +47,9 @@ export const mainListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <RestaurantIcon />
+        <CafeteriaIcon />
       </ListItemIcon>
       <ListItemText primary="Canteen" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <TeacherIcon />
-      </ListItemIcon>
-      <ListItemText primary="Teachers" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -73,18 +74,6 @@ export const secondaryListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Current month" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
     </ListItem>
   </div>
 );

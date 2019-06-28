@@ -21,6 +21,23 @@ import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ClassIcon from '@material-ui/icons/DashboardRounded';
+import StudentIcon from '@material-ui/icons/GrainRounded';
+import TeacherIcon from '@material-ui/icons/PeopleRounded';
+import LibraryIcon from '@material-ui/icons/LocalLibraryRounded';
+import TransportIcon from '@material-ui/icons/LocalShippingRounded';
+import CafeteriaIcon from '@material-ui/icons/RestaurantRounded';
+import ReportIcon from '@material-ui/icons/BarChartRounded';
+import Students from '../students/Students';
+import Classes from '../classes/Classes';
+import Teachers from '../teachers/Teachers';
+import Library from '../library/Library';
+import Cafeteria from '../cafeteria/Cafeteria';
+import Transport from '../transport/Transport';
+import Reports from '../reports/Reports';
 
 function MadeWithLove() {
   return (
@@ -33,6 +50,8 @@ function MadeWithLove() {
     </Typography>
   );
 }
+
+
 
 const drawerWidth = 240;
 
@@ -115,16 +134,94 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function Content() {
+  const classes = useStyles();
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  return (
+      <Container maxWidth="lg" className={classes.container}>
+          <Grid container spacing={3}>
+            {/* Chart */}
+            <Grid item xs={12} md={8} lg={9}>
+              <Paper className={fixedHeightPaper}>
+                <Chart />
+              </Paper>
+            </Grid>
+            {/* Recent Deposits */}
+            <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+                <Deposits />
+              </Paper>
+            </Grid>
+            {/* Recent Orders */}
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Orders />
+              </Paper>
+            </Grid>
+          </Grid>
+        </Container>
+  );
+}
+
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [show, setShow] = React.useState({});
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const showStudents = () => {
+    setShow('students');
+  }
+
+  const showClasses = () => {
+    setShow('classes');
+  }
+
+  const showTeachers = () => {
+    setShow('teachers');
+  }
+
+  const showLibrary = () => {
+    setShow('library');
+  }
+
+  const showCafeteria = () => {
+    setShow('cafeteria');
+  }
+
+  const showTransport = () => {
+    setShow('transport');
+  }
+
+  const showReports = () => {
+    setShow('reports');
+  }
+
+  const renderSwitch = () => {
+    switch(show) {
+      case 'students':
+        return <Students/>;
+      case 'classes':
+        return <Classes/>;
+      case 'teachers':
+        return <Teachers/>;
+      case 'library':
+        return <Library/>;
+      case 'cafeteria':
+        return <Cafeteria/>;
+      case 'transport':
+          return <Transport/>;
+      case 'reports':
+        return <Reports/>;
+      default:
+        return <Content />;
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -163,34 +260,56 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>
+          <ListItem button onClick={showStudents}>
+            <ListItemIcon>
+              <StudentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Students" />
+          </ListItem>
+          <ListItem button onClick={showClasses}>
+            <ListItemIcon>
+              <ClassIcon />
+            </ListItemIcon>
+            <ListItemText primary="Classes" />
+          </ListItem>
+          <ListItem button onClick={showTeachers}>
+            <ListItemIcon>
+              <TeacherIcon />
+            </ListItemIcon>
+            <ListItemText primary="Teachers" />
+          </ListItem>
+          <ListItem button onClick={showLibrary}>
+            <ListItemIcon>
+              <LibraryIcon />
+            </ListItemIcon>
+            <ListItemText primary="Library" />
+          </ListItem>
+          <ListItem button onClick={showCafeteria}>
+            <ListItemIcon>
+              <CafeteriaIcon />
+            </ListItemIcon>
+            <ListItemText primary="Cafeteria" />
+          </ListItem>
+          <ListItem button onClick={showTransport}>
+            <ListItemIcon>
+              <TransportIcon />
+            </ListItemIcon>
+            <ListItemText primary="Transport" />
+          </ListItem>
+          <ListItem button onClick={showReports}>
+            <ListItemIcon>
+              <ReportIcon />
+            </ListItemIcon>
+            <ListItemText primary="Reports" />
+          </ListItem>
+        </List>
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
+        {renderSwitch()}
         <MadeWithLove />
       </main>
     </div>
