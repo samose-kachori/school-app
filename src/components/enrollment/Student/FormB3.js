@@ -9,14 +9,14 @@ export default function FormB3() {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Mother's Details
+        Local Guardian's Details
       </Typography>
       <Grid container spacing={3}>
       <Grid item xs={12} sm={4}>
           <TextField
             required
-            id="mothersFirstName"
-            name="mothersFirstName"
+            id="localGuardiansFirstName"
+            name="localGuardiansFirstName"
             label="First name"
             fullWidth
             autoComplete="fname"
@@ -24,8 +24,8 @@ export default function FormB3() {
         </Grid>
         <Grid item xs={12} sm={4}>
           <TextField
-            id="motherssMiddleName"
-            name="motherssMiddleName"
+            id="localGuardianssMiddleName"
+            name="localGuardianssMiddleName"
             label="Middle name"
             fullWidth
             autoComplete="mname"
@@ -34,8 +34,8 @@ export default function FormB3() {
         <Grid item xs={12} sm={4}>
           <TextField
             required
-            id="mothersLastName"
-            name="mothersLastName"
+            id="localGuardiansLastName"
+            name="localGuardiansLastName"
             label="Last name"
             fullWidth
             autoComplete="lname"
@@ -44,8 +44,8 @@ export default function FormB3() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="mothersAadhaarNumber"
-            name="mothersAadhaarNumber"
+            id="localGuardiansAadhaarNumber"
+            name="localGuardiansAadhaarNumber"
             label="Aadhaar Number"
             fullWidth
             autoComplete="aadhaar"
@@ -54,8 +54,8 @@ export default function FormB3() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="mothersDateOfBirth"
-            name="mothersDateOfBirth"
+            id="localGuardiansDateOfBirth"
+            name="localGuardiansDateOfBirth"
             label="Date of Birth"
             fullWidth
             autoComplete="dob"
@@ -63,8 +63,8 @@ export default function FormB3() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="mothersPhoneNumber"
-            name="mothersPhoneNumber"
+            id="localGuardiansPhoneNumber"
+            name="localGuardiansPhoneNumber"
             label="Phone Number"
             fullWidth
             autoComplete="phone"
@@ -72,8 +72,8 @@ export default function FormB3() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="mothersEmail"
-            name="mothersEmail"
+            id="localGuardiansEmail"
+            name="localGuardiansEmail"
             label="Email"
             fullWidth
             autoComplete="email"
@@ -82,8 +82,8 @@ export default function FormB3() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="mothersOccupation"
-            name="mothersOccupation"
+            id="localGuardiansOccupation"
+            name="localGuardiansOccupation"
             label="Occupation"
             fullWidth
             autoComplete="occupation"
@@ -92,8 +92,8 @@ export default function FormB3() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="mothersHighestDegreeEarned"
-            name="mothersHighestDegreeEarned"
+            id="localGuardiansHighestDegreeEarned"
+            name="localGuardiansHighestDegreeEarned"
             label="Highest Degree Earned"
             fullWidth
             autoComplete="highestDegreeEarned"
