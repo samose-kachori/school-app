@@ -296,20 +296,28 @@ export default function Menu() {
   }
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <MenuCore
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </MenuCore>
-  );
+  const renderMenu = () => {
+    switch(show){
+      case 'students':
+          return (
+            <MenuCore
+          anchorEl={anchorEl}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          id={menuId}
+          keepMounted
+          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={isMenuOpen}
+          onClose={handleMenuClose}
+        >
+          <MenuItem onClick={handleMenuClose}>Enroll</MenuItem>
+          <MenuItem onClick={handleMenuClose}>Terminate</MenuItem>
+        </MenuCore>
+          );
+      default:
+        return <div></div>;
+    }
+  }
+    
 
   return (
     <div className={classes.root}>
@@ -371,7 +379,7 @@ export default function Menu() {
           </div>
         </Toolbar>
       </AppBar>
-      {renderMenu}
+      {renderMenu()}
       <Drawer
         variant="permanent"
         classes={{
