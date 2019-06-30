@@ -46,8 +46,23 @@ import MenuCore from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
-import SchoolTabs from '../enrollment/Student/CenteredTabs'
+import SchoolTabs from '../students/CenteredTabs';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import compose from 'recompose/compose';
+import {
+  drawerOpen,
+  drawerClose,
+  selectStudents,
+  selectDashboard,
+  selectTeachers,
+  selectCafeteria,
+  selectLibrary,
+  selectTransport,
+  selectReports,
+  selectClasses
+} from '../../actions/DrawerActions';
+
 
 function MadeWithLove() {
   return (
@@ -214,88 +229,56 @@ class Menu extends React.Component {
   {
     super(props);
     this.state = {
-      open:true,
-      show:{},
-      drawerTitle:'dashboard',
       anchorEl:null,
       menuId: 'primary-search-account-menu',
     };
-  }
-  /* const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const [show, setShow] = React.useState({});
-  const [drawerTitle, setDrawerTitle] = React.useState('dashboard');
-  const [anchorEl, setAnchorEl] = React.useState(null); */
+  }  
 
-  handleDrawerOpen = () => {
+  handleProfileMenuOpen=(event)=> {
     this.setState({
-      open:true
-    });
-  };
-  handleDrawerClose = () => {
-    this.setState({
-      open:false
-    });
-  };
-
-  showDashboard = () => {
-    this.setState({
-      show:'dashboard',
-      drawerTitle:'Dashboard'
+      anchorEl:event.currentTarget
     });
   }
 
-  showStudents = () => {
+  handleMenuClose=()=> {
     this.setState({
-      show:'students',
-      drawerTitle:'Students'
+      anchorEl:null
     });
   }
-
-  showClasses = () => {
-    this.setState({
-      show:'classes',
-      drawerTitle:'Classes'
-    });
+  
+  renderTabs = (show) => {
+    switch(show){
+      case 'students':
+        return (<SchoolTabs/>);
+      default:
+        return (<div></div>);
+    }
   }
 
-  showTeachers = () => {
-    this.setState({
-      show:'teachers',
-      drawerTitle:'Teachers'
-    });
+  renderMenu = (show) => {
+    switch(show){
+      case 'students':
+          return (
+            <MenuCore
+          anchorEl={this.state.anchorEl}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          id={this.state.menuId}
+          keepMounted
+          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={Boolean(this.state.anchorEl)}
+          onClose={this.handleMenuClose}
+        >
+          <MenuItem onClick={this.handleMenuClose}>Enroll</MenuItem>
+          <MenuItem onClick={this.handleMenuClose}>Terminate</MenuItem>
+        </MenuCore>
+          );
+      default:
+        return (<div></div>);
+    }
   }
 
-  showLibrary = () => {
-    this.setState({
-      show:'library',
-      drawerTitle:'Library'
-    });
-  }
-
-  showCafeteria = () => {
-    this.setState({
-      show:'cafeteria',
-      drawerTitle:'Cafeteria'
-    });
-  }
-
-  showTransport = () => {
-    this.setState({
-      show:'transport',
-      drawerTitle:'Transport'
-    });
-  }
-
-  showReports = () => {
-    this.setState({
-      show:'reports',
-      drawerTitle:'Reports'
-    });
-  }
-
-  renderSwitch = () => {
-    switch(this.state.show) {
+  renderSwitch = (show) => {
+    switch(show) {
       case 'dashboard':
         return (<Dashboard />);
       case 'students':
@@ -317,71 +300,25 @@ class Menu extends React.Component {
     }
   }
 
-
-
-  handleProfileMenuOpen=(event)=> {
-    this.setState({
-      anchorEl:event.currentTarget
-    });
-  }
-
-  handleMenuClose=()=> {
-    this.setState({
-      anchorEl:null
-    });
-  }
-
-  
-  renderMenu = () => {
-    switch(this.state.show){
-      case 'students':
-          return (
-            <MenuCore
-          anchorEl={this.state.anchorEl}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          id={this.state.menuId}
-          keepMounted
-          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-          open={Boolean(this.state.anchorEl)}
-          onClose={this.handleMenuClose}
-        >
-          <MenuItem onClick={this.handleMenuClose}>Enroll</MenuItem>
-          <MenuItem onClick={this.handleMenuClose}>Terminate</MenuItem>
-        </MenuCore>
-          );
-      default:
-        return (<div></div>);
-    }
-  }
-
-  renderTabs = () => {
-    switch(this.state.show){
-      case 'students':
-        return (<SchoolTabs/>);
-      default:
-        return (<div></div>);
-    }
-  }
-    
 render(){
-  const { classes } = this.props;
+  const { classes, show, drawerTitle, dispatch, open } = this.props;
  
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, this.state.open && classes.appBarShift)}>
+      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="Open drawer"
-            onClick={this.handleDrawerOpen}
-            className={clsx(classes.menuButton, this.state.open && classes.menuButtonHidden)}
+            onClick={()=>dispatch(drawerOpen())}
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
           >
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            {this.state.drawerTitle}
+            {drawerTitle}
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -396,7 +333,7 @@ render(){
               inputProps={{ 'aria-label': 'Search' }}
             />
           </div>
-          {this.renderTabs()}
+          {this.renderTabs(show)}
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
@@ -427,64 +364,64 @@ render(){
           </div>
         </Toolbar>
       </AppBar>
-      {this.renderMenu()}
+      {this.renderMenu(show)}
       <Drawer
         variant="permanent"
         classes={{
-          paper: clsx(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
         }}
-        open={this.open}
+        open={open}
       >
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={this.handleDrawerClose}>
+          <IconButton onClick={()=>dispatch(drawerClose())}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
         <List>
-        <ListItem button onClick={this.showDashboard}>
+        <ListItem button onClick={()=>dispatch(selectDashboard())}>
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
           </ListItem>
-          <ListItem button onClick={this.showStudents}>
+          <ListItem button onClick={()=>dispatch(selectStudents())}>
             <ListItemIcon>
               <StudentIcon />
             </ListItemIcon>
             <ListItemText primary="Students" />
           </ListItem>
-          <ListItem button onClick={this.showClasses}>
+          <ListItem button onClick={()=>dispatch(selectClasses())}>
             <ListItemIcon>
               <ClassIcon />
             </ListItemIcon>
             <ListItemText primary="Classes" />
           </ListItem>
-          <ListItem button onClick={this.showTeachers}>
+          <ListItem button onClick={()=>dispatch(selectTeachers())}>
             <ListItemIcon>
               <TeacherIcon />
             </ListItemIcon>
             <ListItemText primary="Teachers" />
           </ListItem>
-          <ListItem button onClick={this.showLibrary}>
+          <ListItem button onClick={()=>dispatch(selectLibrary())}>
             <ListItemIcon>
               <LibraryIcon />
             </ListItemIcon>
             <ListItemText primary="Library" />
           </ListItem>
-          <ListItem button onClick={this.showCafeteria}>
+          <ListItem button onClick={()=>dispatch(selectCafeteria())}>
             <ListItemIcon>
               <CafeteriaIcon />
             </ListItemIcon>
             <ListItemText primary="Cafeteria" />
           </ListItem>
-          <ListItem button onClick={this.showTransport}>
+          <ListItem button onClick={()=>dispatch(selectTransport())}>
             <ListItemIcon>
               <TransportIcon />
             </ListItemIcon>
             <ListItemText primary="Transport" />
           </ListItem>
-          <ListItem button onClick={this.showReports}>
+          <ListItem button onClick={()=>dispatch(selectReports())}>
             <ListItemIcon>
               <ReportIcon />
             </ListItemIcon>
@@ -496,7 +433,7 @@ render(){
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        {this.renderSwitch()}
+        {this.renderSwitch(show)}
         {/*<MadeWithLove />*/}
       </main>
     </div>
@@ -505,8 +442,18 @@ render(){
 };
 
 Menu.propTypes = {
+  open: PropTypes.bool.isRequired,
+  show: PropTypes.string.isRequired,
+  drawerTitle: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Menu);
+const mapStateToProps = (state) => ({
+  open: state.DrawerReducer.open,
+  show: state.DrawerReducer.show,
+  drawerTitle: state.DrawerReducer.drawerTitle
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(Menu));
 

@@ -1,10 +1,42 @@
 import React from 'react';
 import StudentEnrollment from '../enrollment/Student/StudentEnrollment';
+import Main from './Main';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 class Students extends React.Component{
+    constructor(props){
+        super(props);
+    }
+
+    renderTab = (selectedTabName) => {
+        switch(selectedTabName)
+        {
+            case 'Main':
+                return (<Main/>);
+            case 'Enroll':
+                return (<StudentEnrollment/>);
+            default:
+                return (<Main/>);
+        }
+    }
+
     render(){
-        return <StudentEnrollment />
+        const { selectedTabName } = this.props; 
+        return (
+            <div>
+                {this.renderTab(selectedTabName)}
+            </div>
+        );
     }
 }
 
-export default Students;
+Students.propTypes = {
+    selectedTabName: PropTypes.string.isRequired,
+};
+  
+const mapStateToProps = (state) => ({
+    selectedTabName: state.StudentsReducer.selectedTabName,
+});
+  
+export default connect(mapStateToProps)(Students);

@@ -1,0 +1,2 @@
+export const SELECT_MAIN_TAB = 'SELECT_MAIN_TAB';
+export const SELECT_ENROLL_TAB = 'SELECT_ENROLL_TAB';
