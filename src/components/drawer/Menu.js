@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import {fade, makeStyles } from '@material-ui/core/styles';
+import {fade, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -46,6 +46,8 @@ import MenuCore from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
+import SchoolTabs from '../enrollment/Student/CenteredTabs'
+import PropTypes from 'prop-types';
 
 function MadeWithLove() {
   return (
@@ -63,7 +65,7 @@ function MadeWithLove() {
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const styles = (theme) => ({
   root: {
     display: 'flex',
   },
@@ -177,10 +179,9 @@ const useStyles = makeStyles(theme => ({
       width: 200,
     },
   },
-}));
+});
 
-function Content() {
-  const classes = useStyles();
+function Content(classes) {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
       <Container maxWidth="lg" className={classes.container}>
@@ -208,133 +209,179 @@ function Content() {
   );
 }
 
-export default function Menu() {
-  const classes = useStyles();
+class Menu extends React.Component {
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      open:true,
+      show:{},
+      drawerTitle:'dashboard',
+      anchorEl:null,
+      menuId: 'primary-search-account-menu',
+    };
+  }
+  /* const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [show, setShow] = React.useState({});
   const [drawerTitle, setDrawerTitle] = React.useState('dashboard');
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null); */
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  handleDrawerOpen = () => {
+    this.setState({
+      open:true
+    });
   };
-  const handleDrawerClose = () => {
-    setOpen(false);
+  handleDrawerClose = () => {
+    this.setState({
+      open:false
+    });
   };
 
-  const showDashboard = () => {
-    setShow('dashboard');
-    setDrawerTitle('Dashboard');
+  showDashboard = () => {
+    this.setState({
+      show:'dashboard',
+      drawerTitle:'Dashboard'
+    });
   }
 
-  const showStudents = () => {
-    setShow('students');
-    setDrawerTitle('Students');
+  showStudents = () => {
+    this.setState({
+      show:'students',
+      drawerTitle:'Students'
+    });
   }
 
-  const showClasses = () => {
-    setShow('classes');
-    setDrawerTitle('Classes');
+  showClasses = () => {
+    this.setState({
+      show:'classes',
+      drawerTitle:'Classes'
+    });
   }
 
-  const showTeachers = () => {
-    setShow('teachers');
-    setDrawerTitle('Teachers');
+  showTeachers = () => {
+    this.setState({
+      show:'teachers',
+      drawerTitle:'Teachers'
+    });
   }
 
-  const showLibrary = () => {
-    setShow('library');
-    setDrawerTitle('Library');
+  showLibrary = () => {
+    this.setState({
+      show:'library',
+      drawerTitle:'Library'
+    });
   }
 
-  const showCafeteria = () => {
-    setShow('cafeteria');
-    setDrawerTitle('Library');
+  showCafeteria = () => {
+    this.setState({
+      show:'cafeteria',
+      drawerTitle:'Cafeteria'
+    });
   }
 
-  const showTransport = () => {
-    setShow('transport');
-    setDrawerTitle('Transport');
+  showTransport = () => {
+    this.setState({
+      show:'transport',
+      drawerTitle:'Transport'
+    });
   }
 
-  const showReports = () => {
-    setShow('reports');
-    setDrawerTitle('Reports');
+  showReports = () => {
+    this.setState({
+      show:'reports',
+      drawerTitle:'Reports'
+    });
   }
 
-  const renderSwitch = () => {
-    switch(show) {
+  renderSwitch = () => {
+    switch(this.state.show) {
       case 'dashboard':
-        return <Dashboard />;
+        return (<Dashboard />);
       case 'students':
-        return <Students/>;
+        return (<Students/>);
       case 'classes':
-        return <Classes/>;
+        return (<Classes/>);
       case 'teachers':
-        return <Teachers/>;
+        return (<Teachers/>);
       case 'library':
-        return <Library/>;
+        return (<Library/>);
       case 'cafeteria':
-        return <Cafeteria/>;
+        return (<Cafeteria/>);
       case 'transport':
-          return <Transport/>;
+          return (<Transport/>);
       case 'reports':
-        return <Reports/>;
+        return (<Reports/>);
       default:
-        return <Content />;
+        return (<Content />);
     }
   }
 
-  const isMenuOpen = Boolean(anchorEl);
 
-  function handleProfileMenuOpen(event) {
-    setAnchorEl(event.currentTarget);
+
+  handleProfileMenuOpen=(event)=> {
+    this.setState({
+      anchorEl:event.currentTarget
+    });
   }
 
-  function handleMenuClose() {
-    setAnchorEl(null);
+  handleMenuClose=()=> {
+    this.setState({
+      anchorEl:null
+    });
   }
 
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = () => {
-    switch(show){
+  
+  renderMenu = () => {
+    switch(this.state.show){
       case 'students':
           return (
             <MenuCore
-          anchorEl={anchorEl}
+          anchorEl={this.state.anchorEl}
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          id={menuId}
+          id={this.state.menuId}
           keepMounted
           transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-          open={isMenuOpen}
-          onClose={handleMenuClose}
+          open={Boolean(this.state.anchorEl)}
+          onClose={this.handleMenuClose}
         >
-          <MenuItem onClick={handleMenuClose}>Enroll</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Terminate</MenuItem>
+          <MenuItem onClick={this.handleMenuClose}>Enroll</MenuItem>
+          <MenuItem onClick={this.handleMenuClose}>Terminate</MenuItem>
         </MenuCore>
           );
       default:
-        return <div></div>;
+        return (<div></div>);
+    }
+  }
+
+  renderTabs = () => {
+    switch(this.state.show){
+      case 'students':
+        return (<SchoolTabs/>);
+      default:
+        return (<div></div>);
     }
   }
     
-
+render(){
+  const { classes } = this.props;
+ 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar position="absolute" className={clsx(classes.appBar, this.state.open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="Open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+            onClick={this.handleDrawerOpen}
+            className={clsx(classes.menuButton, this.state.open && classes.menuButtonHidden)}
           >
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            {drawerTitle}
+            {this.state.drawerTitle}
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -349,6 +396,7 @@ export default function Menu() {
               inputProps={{ 'aria-label': 'Search' }}
             />
           </div>
+          {this.renderTabs()}
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
@@ -369,9 +417,9 @@ export default function Menu() {
             <IconButton
               edge="end"
               aria-label="Account of current user"
-              aria-controls={menuId}
+              aria-controls={this.state.menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onClick={this.handleProfileMenuOpen}
               color="inherit"
             >
               <AccountCircle />
@@ -379,64 +427,64 @@ export default function Menu() {
           </div>
         </Toolbar>
       </AppBar>
-      {renderMenu()}
+      {this.renderMenu()}
       <Drawer
         variant="permanent"
         classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          paper: clsx(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
         }}
-        open={open}
+        open={this.open}
       >
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={this.handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
         <List>
-        <ListItem button onClick={showDashboard}>
+        <ListItem button onClick={this.showDashboard}>
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
           </ListItem>
-          <ListItem button onClick={showStudents}>
+          <ListItem button onClick={this.showStudents}>
             <ListItemIcon>
               <StudentIcon />
             </ListItemIcon>
             <ListItemText primary="Students" />
           </ListItem>
-          <ListItem button onClick={showClasses}>
+          <ListItem button onClick={this.showClasses}>
             <ListItemIcon>
               <ClassIcon />
             </ListItemIcon>
             <ListItemText primary="Classes" />
           </ListItem>
-          <ListItem button onClick={showTeachers}>
+          <ListItem button onClick={this.showTeachers}>
             <ListItemIcon>
               <TeacherIcon />
             </ListItemIcon>
             <ListItemText primary="Teachers" />
           </ListItem>
-          <ListItem button onClick={showLibrary}>
+          <ListItem button onClick={this.showLibrary}>
             <ListItemIcon>
               <LibraryIcon />
             </ListItemIcon>
             <ListItemText primary="Library" />
           </ListItem>
-          <ListItem button onClick={showCafeteria}>
+          <ListItem button onClick={this.showCafeteria}>
             <ListItemIcon>
               <CafeteriaIcon />
             </ListItemIcon>
             <ListItemText primary="Cafeteria" />
           </ListItem>
-          <ListItem button onClick={showTransport}>
+          <ListItem button onClick={this.showTransport}>
             <ListItemIcon>
               <TransportIcon />
             </ListItemIcon>
             <ListItemText primary="Transport" />
           </ListItem>
-          <ListItem button onClick={showReports}>
+          <ListItem button onClick={this.showReports}>
             <ListItemIcon>
               <ReportIcon />
             </ListItemIcon>
@@ -448,9 +496,17 @@ export default function Menu() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        {renderSwitch()}
+        {this.renderSwitch()}
         {/*<MadeWithLove />*/}
       </main>
     </div>
   );
 }
+};
+
+Menu.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Menu);
+
