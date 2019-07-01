@@ -4,7 +4,8 @@ import {
 } from '../types/StudentsTypes';
 
 const initialState = {
-    selectedTabId: 0
+    selectedTabId: 0,
+    selectedTabName: 'main'
 }
 
 export default function StudentsReducer (state = initialState, action){

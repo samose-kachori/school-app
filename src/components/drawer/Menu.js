@@ -320,19 +320,6 @@ render(){
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             {drawerTitle}
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'Search' }}
-            />
-          </div>
           {this.renderTabs(show)}
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">

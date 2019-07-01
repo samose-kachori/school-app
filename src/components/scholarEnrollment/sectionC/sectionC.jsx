@@ -99,6 +99,12 @@ class SectionC extends React.Component
                     columns={this.state.columns}
                     data={this.state.data}
                     icons={tableIcons}
+                    options={
+                        {
+                            selection: true,
+                            toolbar: true
+                        }
+                    }
                     editable={{
                         onRowAdd: newData =>
                             new Promise(resolve => {
