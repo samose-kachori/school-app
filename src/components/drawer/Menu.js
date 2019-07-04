@@ -17,21 +17,11 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import MainListItems from './MainListItems';
+import {secondaryListItems} from './SecondaryListItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ClassIcon from '@material-ui/icons/DashboardRounded';
-import StudentIcon from '@material-ui/icons/GrainRounded';
-import TeacherIcon from '@material-ui/icons/PeopleRounded';
-import LibraryIcon from '@material-ui/icons/LocalLibraryRounded';
-import TransportIcon from '@material-ui/icons/LocalShippingRounded';
-import CafeteriaIcon from '@material-ui/icons/RestaurantRounded';
-import ReportIcon from '@material-ui/icons/BarChartRounded';
-import DashboardIcon from '@material-ui/icons/TableChartRounded';
 import Students from '../students/Students';
 import Classes from '../classes/Classes';
 import Teachers from '../teachers/Teachers';
@@ -40,8 +30,6 @@ import Cafeteria from '../cafeteria/Cafeteria';
 import Transport from '../transport/Transport';
 import Reports from '../reports/Reports';
 import Dashboard from '../dashboard/Dashboard';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
 import MenuCore from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -49,18 +37,10 @@ import MailIcon from '@material-ui/icons/Mail';
 import SchoolTabs from '../students/CenteredTabs';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import compose from 'recompose/compose';
+
 import {
   drawerOpen,
   drawerClose,
-  selectStudents,
-  selectDashboard,
-  selectTeachers,
-  selectCafeteria,
-  selectLibrary,
-  selectTransport,
-  selectReports,
-  selectClasses
 } from '../../actions/DrawerActions';
 
 
@@ -75,8 +55,6 @@ function MadeWithLove() {
     </Typography>
   );
 }
-
-
 
 const drawerWidth = 240;
 
@@ -157,8 +135,7 @@ const styles = (theme) => ({
   fixedHeight: {
     height: 240,
   },
-
-
+  
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -365,56 +342,7 @@ render(){
           </IconButton>
         </div>
         <Divider />
-        <List>
-        <ListItem button onClick={()=>dispatch(selectDashboard())}>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-          <ListItem button onClick={()=>dispatch(selectStudents())}>
-            <ListItemIcon>
-              <StudentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Students" />
-          </ListItem>
-          <ListItem button onClick={()=>dispatch(selectClasses())}>
-            <ListItemIcon>
-              <ClassIcon />
-            </ListItemIcon>
-            <ListItemText primary="Classes" />
-          </ListItem>
-          <ListItem button onClick={()=>dispatch(selectTeachers())}>
-            <ListItemIcon>
-              <TeacherIcon />
-            </ListItemIcon>
-            <ListItemText primary="Teachers" />
-          </ListItem>
-          <ListItem button onClick={()=>dispatch(selectLibrary())}>
-            <ListItemIcon>
-              <LibraryIcon />
-            </ListItemIcon>
-            <ListItemText primary="Library" />
-          </ListItem>
-          <ListItem button onClick={()=>dispatch(selectCafeteria())}>
-            <ListItemIcon>
-              <CafeteriaIcon />
-            </ListItemIcon>
-            <ListItemText primary="Cafeteria" />
-          </ListItem>
-          <ListItem button onClick={()=>dispatch(selectTransport())}>
-            <ListItemIcon>
-              <TransportIcon />
-            </ListItemIcon>
-            <ListItemText primary="Transport" />
-          </ListItem>
-          <ListItem button onClick={()=>dispatch(selectReports())}>
-            <ListItemIcon>
-              <ReportIcon />
-            </ListItemIcon>
-            <ListItemText primary="Reports" />
-          </ListItem>
-        </List>
+        <List><MainListItems/></List>
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
