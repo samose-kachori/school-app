@@ -89,6 +89,16 @@ export default function FormA() {
             autoComplete="email"
           />
         </Grid>
+        <Grid item xs={12} sm={6}>
+          /** we should instead try and have a drop down here */
+          <TextField
+            id="class"
+            name="class"
+            label="Enrollment class/ course"
+            fullWidth
+            autoComplete="class"
+          />
+        </Grid>
         <Grid item xs={12}>
           <TextField
             required
