@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const steps = ['FormA', 'FormB1','FormB2','FormB3','FormB4' ,'FormC'];
+const steps = ['Student', 'Father','Mother','Guardian','Prev. School' ,'Summary'];
 
 function getStepContent(step) {
   switch (step) {
