@@ -5,13 +5,15 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Dropzone from "react-dropzone";
+import {storage} from "../../config/firebase-config";
+// import axios from 'axios';
 
 export default class FormA extends React.Component {
   constructor (props) {
     super(props);
 
     this.state = {
-      uploadFile : ''
+      uploadedFirebaseImage: ''
     };
   }
 
@@ -19,15 +21,49 @@ export default class FormA extends React.Component {
     /* files would always be an array as per react */
     //console.log('logging the file name before setting to state ' + files[0].name);
     this.setState({
-      uploadFile : files[0]
+      uploadedFirebaseImage : files[0]
     });
-
+    console.log("calling the firebase upload method");
     this.handleImageUpload(files[0]);
   }
 
   handleImageUpload (fileToUpload) {
-    // TODO actually handle the image upload
-    // process here
+    // Actually handling the image upload process here
+
+    /* TODO need to look at image replacement logic */
+
+    // Generata a new file name for every upload
+    let currentImageName = "firebase-image-" + Date.now();
+    //console.log("image name we got: " + currentImageName);
+
+    // start the upload task
+    let uploadImage = storage
+      .ref(`images/${currentImageName}`)
+      .put(fileToUpload);
+
+    // handle the upload task's state changes
+    /* 
+    TODO Will have to handle upload progress display/ 
+    handling (pause/ resume) etc here.
+    */
+    uploadImage.on(
+      "state_changed",
+      snapshot => {},
+      error => {
+        alert(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(currentImageName)
+          .getDownloadURL()
+          .then(url => {
+            this.setState({
+              uploadedFirebaseImage: url
+            });
+          });
+      }
+    );
   }
 
   render() {
@@ -57,15 +93,14 @@ export default class FormA extends React.Component {
                 <section>
                   <div {...getRootProps()}>
                     <input {...getInputProps()} />
-                    {this.state.uploadFile === '' ? (
+                    {this.state.uploadedFirebaseImage === '' ? (
                       <Typography>
                         Drag 'n' drop image file here, or click to select
                         file
                       </Typography>
                     ) : (
                       <div>
-                        <Typography>{this.state.uploadFile.name}</Typography>
-                        <img src={this.state.uploadFile} />
+                        <img width="200" height="200" src={this.state.uploadedFirebaseImage} />
                       </div>
                     )}
                   </div>
