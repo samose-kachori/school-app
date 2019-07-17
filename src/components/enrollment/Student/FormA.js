@@ -6,6 +6,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Dropzone from "react-dropzone";
 import {storage} from "../../config/firebase-config";
+// Toastify message alert
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import axios from 'axios';
 
 export default class FormA extends React.Component {
@@ -13,7 +16,8 @@ export default class FormA extends React.Component {
     super(props);
 
     this.state = {
-      uploadedFirebaseImage: ''
+      uploadedFirebaseImage: '',
+      imageFirebaseRef: ''
     };
   }
 
@@ -27,32 +31,68 @@ export default class FormA extends React.Component {
     this.handleImageUpload(files[0]);
   }
 
+  // Actually handling the image upload process here
   handleImageUpload (fileToUpload) {
-    // Actually handling the image upload process here
-
-    /* TODO need to look at image replacement logic */
+    /* Image replacement logic -> delete-upload */
+    // check if some image was already uploaded
+    if (this.state.imageFirebaseRef !== '') {
+      storage.ref(this.state.imageFirebaseRef).delete().then(
+        () => {console.log('previous file deleted successfully ' + this.state.imageFirebaseRef)}
+      ).catch(function(error) {
+        console.log("error occurred while trying to delete the previous file " + error);
+      });
+    }
 
     // Generata a new file name for every upload
     let currentImageName = "firebase-image-" + Date.now();
+    this.state.imageFirebaseRef = `images/${currentImageName}`;
     //console.log("image name we got: " + currentImageName);
+
+    // we need to keep a reference of the toastId to be able to update it
+    let toastId = null;
 
     // start the upload task
     let uploadImage = storage
-      .ref(`images/${currentImageName}`)
+      .ref(this.state.imageFirebaseRef)
       .put(fileToUpload);
 
-    // handle the upload task's state changes
     /* 
-    TODO Will have to handle upload progress display/ 
-    handling (pause/ resume) etc here.
+    TODO Do we need options of pause/ resume etc here?
     */
+    // Listen for state changes, errors, and completion of the upload.
     uploadImage.on(
-      "state_changed",
-      snapshot => {},
+      "state_changed", // or firebase.storage.TaskEvent.STATE_CHANGED
+      snapshot => {
+        /*
+        // Get task progress, 
+        including the number of bytes uploaded 
+        and the total number of bytes to be uploaded
+        */
+       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+       //console.log('Upload is ' + progress + '% done');
+
+       // Handle display of progress in Toast
+       // check if we already displayed a toast
+       if (toastId === null) {
+         // create new toast for progress
+         toastId = toast('Upload progress', {
+           progress: progress,
+           position: toast.POSITION.BOTTOM_CENTER
+         });
+       } else {
+         // update existing toast with progress
+        toast.update(toastId, {
+          progress: progress
+        })
+       }
+      }, 
       error => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
         alert(error);
       },
       () => {
+        // Upload completed successfully, now we can get the download URL
         storage
           .ref("images")
           .child(currentImageName)
@@ -62,6 +102,11 @@ export default class FormA extends React.Component {
               uploadedFirebaseImage: url
             });
           });
+
+        // Upload is done! 
+        // The remaining progress bar will be filled up
+        // The toast will be closed when the transition end
+        toast.done(toastId);
       }
     );
   }
@@ -282,6 +327,7 @@ export default class FormA extends React.Component {
             />
           </Grid>
         </Grid>
+        <ToastContainer autoClose = {false} />
       </React.Fragment>
     );
   }
