@@ -5,10 +5,6 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Students extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
     renderTab = (selectedTabName) => {
         switch(selectedTabName)
         {
