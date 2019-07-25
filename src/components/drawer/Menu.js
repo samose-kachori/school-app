@@ -94,7 +94,7 @@ const styles = (theme) => ({
     display: 'none',
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 0,
   },
   drawerPaper: {
     position: 'relative',
@@ -135,7 +135,7 @@ const styles = (theme) => ({
   fixedHeight: {
     height: 240,
   },
-  
+
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
