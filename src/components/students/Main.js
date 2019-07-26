@@ -140,7 +140,13 @@ class Main extends React.Component
                               tooltip: 'Refresh Data',
                               isFreeAction: true,
                               onClick: () => {alert('You should develop a code to export');},
-                            }
+                            },
+                            {
+                                icon: 'add',
+                                tooltip: 'add',
+                                isFreeAction: true,
+                                onClick: () => {alert('You should develop a code to export');},
+                              }
                           ]}
                     />
                

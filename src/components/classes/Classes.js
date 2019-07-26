@@ -1,8 +1,13 @@
 import React from 'react';
+import AddressTable from '../address/AddressTable';
 
 class Classes extends React.Component{
     render(){
-        return <div>Classes</div>
+        return (
+            <React.Fragment>
+                <AddressTable/>
+            </React.Fragment>
+        )
     }
 }
 
