@@ -33,7 +33,7 @@ import MenuCore from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
-import SchoolTabs from '../students/CenteredTabs';
+
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -157,6 +157,21 @@ const styles = (theme) => ({
       width: 200,
     },
   },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+  },
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  grow: {
+    flexGrow: 1,
+  },
 });
 
 function Content(classes) {
@@ -211,8 +226,6 @@ class Menu extends React.Component {
   
   renderTabs = (show) => {
     switch(show){
-      case 'students':
-        return (<SchoolTabs/>);
       default:
         return (<div></div>);
     }
@@ -284,11 +297,6 @@ render(){
             {drawerTitle}
           </Typography>
           {this.renderTabs(show)}
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="Show 4 new mails" color="inherit">
@@ -322,6 +330,7 @@ render(){
         }}
         open={open}
       >
+        Hello User
         <div className={classes.toolbarIcon}>
           <IconButton onClick={()=>dispatch(drawerClose())}>
             <ChevronLeftIcon />
@@ -335,7 +344,7 @@ render(){
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         {this.renderSwitch(show)}
-        {/*<MadeWithLove />*/}
+          {/*<MadeWithLove />*/}
       </main>
     </div>
   );

@@ -5,6 +5,7 @@ import {
 } from '../types/AddressTypes';
 
 const initialState = {
+    addressType: null,
     addressLine1: null,
     addressLine2: null,
     city: null,

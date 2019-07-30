@@ -3,6 +3,7 @@ import StudentEnrollment from '../enrollment/Student/StudentEnrollment';
 import Main from './Main';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import SimpleExpansionPanel from './SimpleExpansionPanel';
 
 class Students extends React.Component{
     renderTab = (selectedTabName) => {
@@ -21,7 +22,12 @@ class Students extends React.Component{
         const { selectedTabName } = this.props; 
         return (
             <div>
-                {this.renderTab(selectedTabName)}
+                <div>
+                    <SimpleExpansionPanel/>
+                </div>
+                <div>
+                    {this.renderTab(selectedTabName)}
+                </div>
             </div>
         );
     }

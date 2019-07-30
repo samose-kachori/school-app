@@ -47,35 +47,22 @@ const tableIcons = {
 
 const columns = [
     { title: 'Actions', field: 'actions', render: rowData=><RowActions rowData/>, sorting:false},
-    { title: 'Student Id', field: 'studentId', type: 'string'},
-    { title: 'Name', field: 'name', type:'string'},
-    { title: 'Class', field: 'class', type:'string', defaultGroupOrder: 0 },
-    { title: 'House', field: 'house', type:'string' },
-    { title: 'Date of Admission', field: 'dateOfAdmission', type:'date' },
+    { title: 'Address Type', field: 'addressType', type:'string'},
+    { title: 'Address', field: 'address', type:'string'},
+    { title: 'Country', field: 'country', type:'string'},
 ];
 
 const data =  [
-{
-    studentId: '6',
-    name: 'John Doe',
-    class: 'VI A',
-    house: 'Green',
-    dateOfAdmission:'2011-06-01'
-},
-{
-    studentId: '7',
-    name: 'Rachel Greene',
-    class: 'VII B',
-    house: 'Blue',
-    dateOfAdmission:'2012-06-01'
-},
-{
-    studentId: '8',
-    name: 'Joey',
-    class: 'VI A',
-    house: 'Blue',
-    dateOfAdmission:'2013-06-01'
-},
+    {
+        addressType: 'home',
+        address: '146 Sussex St., Apt#1, Jersey City, NJ 07302',
+        country: 'United States'
+    },
+    {
+        addressType: 'home',
+        address: '148 Sussex St., Apt#1, Jersey City, NJ 07302',
+        country: 'United States'
+    },
 ];
 
 class AddressTable extends React.Component{
@@ -90,7 +77,7 @@ class AddressTable extends React.Component{
             <React.Fragment>
                 <Grid item xs={12}>
                     <MaterialTable
-                        title={"Classes Attended"}
+                        title={"Addresses"}
                         columns={columns}
                         data={data}
                         icons={tableIcons}

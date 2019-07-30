@@ -9,11 +9,56 @@ import {
 import {connect} from 'react-redux';
 
 class AddressForm extends React.Component{
-    render(){
-        const {dispatch} = this.props;
+    constructor(props){
+        super(props);
+        this.state = {
+            addressType:'',
+            addressLine1:'',
+            addressLine2:'',
+            city:'',
+            state:'',
+            country:'',
+            zip:''
+        }
+    }
+
+    handleAddressLine1Change = (event) => {
+        console.log(event.target.value);
+        this.setState({addressLine1: event.target.value});
+    }
+
+    handleAddressLine2Change = (event) => {
+        this.setState({addressLine2: event.target.value});
+    }
+
+    handleCityChange = (event) => {
+        this.setState({city: event.target.value});
+    }
+
+    handleStateChange = (event) => {
+        this.setState({state: event.target.value});
+    }
+
+    handleCountryChange = (event) => {
+        this.setState({country: event.target.value});
+    }
+
+    handleZipChange = (event) => {
+        this.setState({zip: event.target.value});
+    }
+
+    render(){        
         const handleAdd = () => {
             console.log('add');
-            dispatch(addAddress(null, null, null, null, null, null, null));
+            const {dispatch} = this.props;
+            const addressType = 'home';
+            const addressLine1 = this.state.addressLine1;
+            const addressLine2 = this.state.addressLine2;
+            const city = this.state.city;
+            const state = this.state.state;
+            const country = this.state.country;
+            const zip = this.state.zip;
+            dispatch(addAddress(addressType, addressLine1, addressLine2, city, state, country, zip));
         }
     
         const handleCancel = () => {
@@ -32,8 +77,9 @@ class AddressForm extends React.Component{
                     <Grid item xs={12} sm={12}>
                         <TextField
                             required
-                            id="address1"
-                            name="address1"
+                            onChange={this.handleAddressLine1Change}
+                            id="addressLine1"
+                            name="addressLine1"
                             label="Address line 1"
                             fullWidth
                             autoComplete="billing address-line1"
@@ -41,8 +87,9 @@ class AddressForm extends React.Component{
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <TextField
-                            id="address2"
-                            name="address2"
+                            id="addressLine2"
+                            onChange={this.handleAddressLine2Change}
+                            name="addressLine2"
                             label="Address line 2"
                             fullWidth
                             autoComplete="billing address-line2"
@@ -52,6 +99,7 @@ class AddressForm extends React.Component{
                         <TextField
                             required
                             id="city"
+                            onChange={this.handleCityChange}
                             name="city"
                             label="City"
                             fullWidth
@@ -61,6 +109,7 @@ class AddressForm extends React.Component{
                     <Grid item xs={12} sm={6}>
                         <TextField
                             id="state"
+                            onChange={this.handleStateChange}
                             name="state"
                             label="State/Province/Region"
                             fullWidth
@@ -70,6 +119,7 @@ class AddressForm extends React.Component{
                         <TextField
                             required
                             id="zip"
+                            onChange={this.handleZipChange}
                             name="zip"
                             label="Zip / Postal code"
                             fullWidth
@@ -80,6 +130,7 @@ class AddressForm extends React.Component{
                         <TextField
                             required
                             id="country"
+                            onChange={this.handleCountryChange}
                             name="country"
                             label="Country"
                             fullWidth

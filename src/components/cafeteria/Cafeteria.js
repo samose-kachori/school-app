@@ -1,8 +1,9 @@
 import React from 'react';
+import SimpleExpansionPanel from '../students/SimpleExpansionPanel';
 
 class Cafeteria extends React.Component{
     render(){
-        return <div>Cafeteria</div>
+        return <div><SimpleExpansionPanel/></div>
     }
 }
 

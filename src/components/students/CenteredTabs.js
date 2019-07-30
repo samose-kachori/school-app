@@ -31,6 +31,10 @@ class CenteredTabs extends React.Component {
         >
           <Tab label="Main" />
           <Tab label="Enroll" />
+          <Tab label="Addresses" />
+          <Tab label="Contacts" />
+          <Tab label="Profile" />
+          <Tab label="Report" />
         </Tabs>
         </React.Fragment>
     );
