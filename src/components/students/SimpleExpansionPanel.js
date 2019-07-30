@@ -62,7 +62,7 @@ export default function SimpleExpansionPanel() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Grid container>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={3}>
             <List className={classes.rootList}>
                 <ListItem button
                     selected={selectedIndex === 0}
@@ -92,7 +92,7 @@ export default function SimpleExpansionPanel() {
                 </ListItem>
               </List>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={3}>
             <List className={classes.rootList}>
                 <ListItem button
                     selected={selectedIndex === 4}
@@ -122,7 +122,7 @@ export default function SimpleExpansionPanel() {
                 </ListItem>
               </List>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={3}>
             <List className={classes.rootList}>
                 <ListItem button
                     selected={selectedIndex === 7}
@@ -152,7 +152,7 @@ export default function SimpleExpansionPanel() {
                 </ListItem>
               </List>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={12} sm={3}>
             <List className={classes.rootList}>
                 <ListItem button
                     selected={selectedIndex === 10}
