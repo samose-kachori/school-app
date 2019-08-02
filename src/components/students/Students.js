@@ -6,12 +6,12 @@ import PropTypes from 'prop-types';
 import SimpleExpansionPanel from './SimpleExpansionPanel';
 
 class Students extends React.Component{
-    renderTab = (selectedTabName) => {
-        switch(selectedTabName)
+    renderTab = (selectedAction) => {
+        switch(selectedAction)
         {
-            case 'Main':
+            case 'main':
                 return (<Main/>);
-            case 'Enroll':
+            case 'enroll':
                 return (<StudentEnrollment/>);
             default:
                 return (<Main/>);
@@ -19,14 +19,14 @@ class Students extends React.Component{
     }
 
     render(){
-        const { selectedTabName } = this.props; 
+        const { selectedAction } = this.props; 
         return (
             <div>
                 <div>
                     <SimpleExpansionPanel/>
                 </div>
                 <div>
-                    {this.renderTab(selectedTabName)}
+                    {this.renderTab(selectedAction)}
                 </div>
             </div>
         );
@@ -34,11 +34,11 @@ class Students extends React.Component{
 }
 
 Students.propTypes = {
-    selectedTabName: PropTypes.string.isRequired,
+    selectedAction: PropTypes.string.isRequired,
 };
   
 const mapStateToProps = (state) => ({
-    selectedTabName: state.StudentsReducer.selectedTabName,
+    selectedAction: state.StudentsReducer.selectedAction,
 });
   
 export default connect(mapStateToProps)(Students);

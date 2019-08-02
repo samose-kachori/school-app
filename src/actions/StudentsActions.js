@@ -1,38 +1,50 @@
 import {
-    SELECT_MAIN_TAB,
-    SELECT_ENROLL_TAB
+    SELECT_MAIN,
+    SELECT_ENROLL,
+    SELECT_ADDRESSES
 } from '../types/StudentsTypes';
 
-const selectMainTab = () => {
+const selectMain = () => {
     return {
-        type: SELECT_MAIN_TAB,
+        type: SELECT_MAIN,
         payload :{
-            selectedTabId: 0,
-            selectedTabName: 'Main'
+            selectedAction: 'main',
+            selectedActionName: 'Main'
         }
     }
 }
 
-const selectEnrollTab = () => {
+const selectEnroll = () => {
     return {
-        type: SELECT_ENROLL_TAB,
+        type: SELECT_ENROLL,
         payload: {
-            selectedTabId: 1,
-            selectedTabName: 'Enroll'
+            selectedAction: 'enroll',
+            selectedActionName: 'Enroll'
+        }
+    }
+}
+const selectAddresses = () => {
+    return {
+        type: SELECT_ADDRESSES,
+        payload: {
+            selectedAction: 'addresses',
+            selectedActionName: 'Addresses'
         }
     }
 }
 
-export const selectTab = (newValue, props) => {
+export const selectAction = (newValue, props) => {
     console.log(newValue);
     const {dispatch} = props;  
     switch (newValue){
-        case 0: 
-            return dispatch(selectMainTab());
-        case 1: 
-            return dispatch(selectEnrollTab());
+        case "main": 
+            return dispatch(selectMain());
+        case "enroll": 
+            return dispatch(selectEnroll());
+        case "addresses": 
+            return dispatch(selectAddresses());
         default:
-            return dispatch(selectMainTab())
+            return dispatch(selectMain())
     }
 }
 

@@ -231,28 +231,6 @@ class Menu extends React.Component {
     }
   }
 
-  renderMenu = (show) => {
-    switch(show){
-      case 'students':
-          return (
-            <MenuCore
-          anchorEl={this.state.anchorEl}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          id={this.state.menuId}
-          keepMounted
-          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-          open={Boolean(this.state.anchorEl)}
-          onClose={this.handleMenuClose}
-        >
-          <MenuItem onClick={this.handleMenuClose}>Enroll</MenuItem>
-          <MenuItem onClick={this.handleMenuClose}>Terminate</MenuItem>
-        </MenuCore>
-          );
-      default:
-        return (<div></div>);
-    }
-  }
-
   renderSwitch = (show) => {
     switch(show) {
       case 'dashboard':
@@ -322,7 +300,6 @@ render(){
           </div>
         </Toolbar>
       </AppBar>
-      {this.renderMenu(show)}
       <Drawer
         variant="permanent"
         classes={{
@@ -330,7 +307,6 @@ render(){
         }}
         open={open}
       >
-        Hello User
         <div className={classes.toolbarIcon}>
           <IconButton onClick={()=>dispatch(drawerClose())}>
             <ChevronLeftIcon />

@@ -1,26 +1,33 @@
 import {
-    SELECT_MAIN_TAB,
-    SELECT_ENROLL_TAB
+    SELECT_MAIN,
+    SELECT_ENROLL,
+    SELECT_ADDRESSES
 } from '../types/StudentsTypes';
 
 const initialState = {
-    selectedTabId: 0,
-    selectedTabName: 'main'
+    selectedAction: 'main',
+    selectedActionName: 'Main'
 }
 
 export default function StudentsReducer (state = initialState, action){
     switch (action.type) {
-        case SELECT_MAIN_TAB:
+        case SELECT_MAIN:
             return {
                 ...state,
-                selectedTabId: action.payload.selectedTabId,
-                selectedTabName: action.payload.selectedTabName
+                selectedAction: action.payload.selectedAction,
+                selectedActionName: action.payload.selectedActionName
             };
-        case SELECT_ENROLL_TAB:
+        case SELECT_ENROLL:
             return {
                 ...state,
-                selectedTabId: action.payload.selectedTabId,
-                selectedTabName: action.payload.selectedTabName
+                selectedAction: action.payload.selectedAction,
+                selectedActionName: action.payload.selectedActionName
+            };
+        case SELECT_ADDRESSES:
+            return {
+                    ...state,
+                    selectedAction: action.payload.selectedAction,
+                    selectedActionName: action.payload.selectedActionName
             };
         default:
             return state;
