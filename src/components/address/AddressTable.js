@@ -67,8 +67,26 @@ const data =  [
 
 class AddressTable extends React.Component{
     render(){
-        const { dispatch } = this.props;
+        const { dispatch, data } = this.props;
     
+        function getAddresses(){
+            let addressList = [];
+            data.forEach(function(element) {
+                const address = element.addressLine1+','
+                +element.city+','
+                +element.state+','
+                +element.zip;
+                addressList.push( 
+                    {
+                        ...element,
+                        addressType: 'Home',
+                        address
+                    }
+                );
+            });
+            return addressList;
+        }
+
         const handleAddClick = () => {
             dispatch(openAddressForm(this.props));
         }
@@ -79,7 +97,7 @@ class AddressTable extends React.Component{
                     <MaterialTable
                         title={"Addresses"}
                         columns={columns}
-                        data={data}
+                        data={getAddresses()}
                         icons={tableIcons}
                         actions={[
                             {
@@ -105,11 +123,13 @@ class AddressTable extends React.Component{
 
 AddressTable.propTypes = {
     open: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
+    data: PropTypes.array
 };
   
 const mapStateToProps = (state) => ({
     open: state.AddressReducer.open,
+    data: state.AddressReducer.data,
 });
   
 export default connect(mapStateToProps)(AddressTable);

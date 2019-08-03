@@ -5,14 +5,8 @@ import {
 } from '../types/AddressTypes';
 
 const initialState = {
-    addressType: null,
-    addressLine1: null,
-    addressLine2: null,
-    city: null,
-    state: null,
-    country: null, 
-    zip: null,
-    open: false
+    open: false,
+    data: []
 }
 
 export default function AddressReducer (state = initialState, action){
@@ -38,12 +32,17 @@ export default function AddressReducer (state = initialState, action){
             return {
                 ...state,
                 open: action.payload.open,
-                addressLine1: action.payload.addressLine1,
-                addressLine2: action.payload.addressLine2,
-                city: action.payload.city,
-                state: action.payload.state,
-                country: action.payload.country,
-                zip: action.payload.zip
+                data: [
+                    ...state.data,
+                    {
+                        addressLine1: action.payload.addressLine1,
+                        addressLine2: action.payload.addressLine2,
+                        city: action.payload.city,
+                        state: action.payload.state,
+                        country: action.payload.country,
+                        zip: action.payload.zip,
+                    }
+                ]
             }
         default:
             return state;
