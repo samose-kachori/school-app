@@ -4,7 +4,7 @@ import {
     SELECT_ADDRESSES
 } from '../types/StudentsTypes';
 
-const selectMain = () => {
+function selectMain(){
     return {
         type: SELECT_MAIN,
         payload :{
@@ -14,7 +14,7 @@ const selectMain = () => {
     }
 }
 
-const selectEnroll = () => {
+function selectEnroll() {
     return {
         type: SELECT_ENROLL,
         payload: {
@@ -23,7 +23,7 @@ const selectEnroll = () => {
         }
     }
 }
-const selectAddresses = () => {
+function selectAddresses(){
     return {
         type: SELECT_ADDRESSES,
         payload: {
@@ -33,7 +33,7 @@ const selectAddresses = () => {
     }
 }
 
-export const selectAction = (newValue, props) => {
+export function selectAction(newValue, props){
     console.log(newValue);
     const {dispatch} = props;  
     switch (newValue){

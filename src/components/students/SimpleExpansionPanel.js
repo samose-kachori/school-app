@@ -15,6 +15,7 @@ import {
 import {withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 const styles = makeStyles(theme => ({
   root: {
@@ -36,11 +37,10 @@ export class SimpleExpansionPanel extends React.Component {
   }
   
   render(){
-    const handleListItemClick = (event, action) => {
-      dispatch(selectAction(action, this.props));
-    }
-
     const { dispatch, selectedAction } = this.props;
+    const handleListItemClick = (event, action) => {
+      selectAction(action, this.props);
+    }
 
     return (
       <div>
@@ -174,5 +174,12 @@ SimpleExpansionPanel.propTypes = {
 const mapStateToProps = (state) => ({
   selectedAction: state.StudentsReducer.selectedAction,
 });
+
+// const mapDispatchToProps = dispatch => bindActionCreators(
+//   {
+//     selectAction
+//   },
+//   dispatch,
+// )
 
 export default connect(mapStateToProps)(SimpleExpansionPanel);

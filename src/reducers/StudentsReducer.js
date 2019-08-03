@@ -10,6 +10,7 @@ const initialState = {
 }
 
 export default function StudentsReducer (state = initialState, action){
+    console.log(action.type);
     switch (action.type) {
         case SELECT_MAIN:
             return {
@@ -18,6 +19,7 @@ export default function StudentsReducer (state = initialState, action){
                 selectedActionName: action.payload.selectedActionName
             };
         case SELECT_ENROLL:
+            console.log("******************");
             return {
                 ...state,
                 selectedAction: action.payload.selectedAction,
