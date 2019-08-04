@@ -17,7 +17,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import PhoneModal from './PhoneModal';
+import PhoneForm from './PhoneForm';
 import RowActions from '../../rowActions/RowActions';
 import PropTypes from 'prop-types';
 import {
@@ -84,7 +84,7 @@ class PhoneTable extends React.Component{
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <PhoneModal />
+                    <PhoneForm />
                 </Grid>
             </React.Fragment>
         )

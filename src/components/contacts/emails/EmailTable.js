@@ -17,7 +17,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import EmailModal from './EmailModal';
+import EmailForm from './EmailForm';
 import RowActions from '../../rowActions/RowActions';
 import PropTypes from 'prop-types';
 import {
@@ -83,7 +83,7 @@ class EmailTable extends React.Component{
                           ]}
                     />
                 </Grid>
-                <EmailModal />
+                <EmailForm />
             </React.Fragment>
         )
     }

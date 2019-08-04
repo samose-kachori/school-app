@@ -1,21 +1,36 @@
 import React from 'react';
+import Modal from '@material-ui/core/Modal';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import PropTypes from 'prop-types';
 import {
     addEmail
 } from '../../../actions/EmailActions';
-import {connect} from 'react-redux';
 
 class EmailForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            open:false,
             emailType:'',
             email:'',
         }
     }
+
+    handleOnClose = () => {
+        this.setState(
+            {
+                open:false
+            }
+        )
+    } 
 
     handleEmailTypeChange = (event) => {
         console.log(event.target.value);
@@ -27,7 +42,7 @@ class EmailForm extends React.Component{
         this.setState({email: event.target.value});
     }
 
-    render(){        
+    render(){
         const handleAdd = () => {
             console.log('add');
             const {dispatch} = this.props;
@@ -35,61 +50,44 @@ class EmailForm extends React.Component{
             const email = this.state.email;
             dispatch(addEmail(emailType, email));
         }
-    
-        const handleCancel = () => {
-            console.log('cancel');
-        }
 
+        const {open} = this.props;
         return (
-                <div style={{ backgroundColor: "white",
-                    width: "600px",
-                    height: "300px",
-                    paddingLeft: "30px",
-                    paddingRight: "30px",
-                    paddingTop: "30px",
-                    paddingBottom: "30px"}}>
-                <Grid container>
-                    <Grid item xs={12} sm={12}>
-                        <TextField
-                            required
-                            onChange={this.handleEmailTypeChange}
-                            id="emailType"
-                            name="emailType"
-                            label="Type"
-                            fullWidth
-                            autoComplete="email type"
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={12}>
-                        <TextField
-                            id="email"
-                            onChange={this.handleEmailChange}
-                            name="email"
-                            label="Email"
-                            fullWidth
-                            autoComplete="email"
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleAdd}
-                        >
-                        {'Add'}
-                    </Button>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleCancel}
-                        >
-                        {'Cancel'}
+            <React.Fragment>
+                <Dialog open={open} onClose={this.handleOnClose}>
+                    <DialogTitle>Add Email</DialogTitle>
+                    <DialogContent>
+                        <Grid container>
+                            <Grid item xs={12} sm={12}>
+                                <TextField
+                                    required
+                                    onChange={this.handleEmailTypeChange}
+                                    id="emailType"
+                                    name="emailType"
+                                    label="Type"
+                                    fullWidth
+                                    autoComplete="email type"
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={12}>
+                                <TextField
+                                    id="email"
+                                    onChange={this.handleEmailChange}
+                                    name="email"
+                                    label="Email"
+                                    fullWidth
+                                    autoComplete="email"
+                                />
+                            </Grid>
+                        </Grid>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleAdd} color="primary">
+                            Save
                         </Button>
-                    </Grid>
-                </Grid>
-            </div>
+                    </DialogActions>
+                </Dialog>
+            </React.Fragment>
         )
     }
 }

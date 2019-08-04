@@ -16,6 +16,7 @@ import {withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
+import AppBar from '@material-ui/core/AppBar';
 
 const styles = makeStyles(theme => ({
   root: {
@@ -43,8 +44,9 @@ export class SimpleExpansionPanel extends React.Component {
     }
 
     return (
-      <div>
-        <ExpansionPanel>
+      <React.Fragment>
+        <AppBar position="sticky" color="default">
+        <ExpansionPanel postion="sticky">
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -161,7 +163,8 @@ export class SimpleExpansionPanel extends React.Component {
             </Grid>
           </ExpansionPanelDetails>
         </ExpansionPanel>
-      </div>
+        </AppBar>
+      </React.Fragment>
     );
   }
 }
