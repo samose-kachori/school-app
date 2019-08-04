@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import SimpleExpansionPanel from './SimpleExpansionPanel';
 import Addresses from '../address';
+import Contacts from '../contacts';
+
 class Students extends React.Component{
     renderTab = (selectedAction) => {
         switch(selectedAction)
@@ -15,6 +17,8 @@ class Students extends React.Component{
                 return (<StudentEnrollment/>);
             case 'addresses':
                 return (<Addresses/>);
+            case 'contacts':
+                return (<Contacts/>);
             default:
                 return (<Main/>);
         }
