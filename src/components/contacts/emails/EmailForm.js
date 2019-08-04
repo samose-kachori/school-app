@@ -13,6 +13,11 @@ import Button from '@material-ui/core/Button';
 import {
     addEmail
 } from '../../../actions/EmailActions';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 
 class EmailForm extends React.Component{
     constructor(props){
@@ -46,9 +51,17 @@ class EmailForm extends React.Component{
         const handleAdd = () => {
             console.log('add');
             const {dispatch} = this.props;
-            const emailType = 'primary';
+            const emailType = this.state.emailType;
             const email = this.state.email;
             dispatch(addEmail(emailType, email));
+        }
+
+        const handleChange = (event) => {
+            console.log(event.target.name);
+            console.log(event.target.value);
+            this.setState({
+                emailType: event.target.value,
+            });
         }
 
         const {open} = this.props;
@@ -59,15 +72,24 @@ class EmailForm extends React.Component{
                     <DialogContent>
                         <Grid container>
                             <Grid item xs={12} sm={12}>
-                                <TextField
-                                    required
-                                    onChange={this.handleEmailTypeChange}
-                                    id="emailType"
-                                    name="emailType"
-                                    label="Type"
-                                    fullWidth
-                                    autoComplete="email type"
-                                />
+                                <FormControl required>
+                                    <InputLabel htmlFor="emailtype-required">Type</InputLabel>
+                                    <Select
+                                        value={this.state.emailType}
+                                        onChange={handleChange}
+                                        name="emailType"
+                                        inputProps={{
+                                            id: 'emailType-required',
+                                        }}
+                                    >
+                                        <MenuItem value="">
+                                            <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value={'primary'}>Primary</MenuItem>
+                                        <MenuItem value={'alternate'}>Alternate</MenuItem>
+                                    </Select>
+                                    <FormHelperText>Required</FormHelperText>
+                                </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={12}>
                                 <TextField
