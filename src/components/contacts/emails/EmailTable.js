@@ -24,6 +24,9 @@ import {
     openEmailForm
 } from '../../../actions/EmailActions';
 import {connect} from 'react-redux';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -61,7 +64,7 @@ class EmailTable extends React.Component{
 
         return(
             <React.Fragment>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={12}>
                     <MaterialTable
                         title={"Emails"}
                         columns={columns}
@@ -83,6 +86,7 @@ class EmailTable extends React.Component{
                           ]}
                     />
                 </Grid>
+                
                 <EmailForm />
             </React.Fragment>
         )

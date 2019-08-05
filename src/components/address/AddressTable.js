@@ -24,6 +24,9 @@ import {
     openAddressForm
 } from '../../actions/AddressActions';
 import {connect} from 'react-redux';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -93,6 +96,9 @@ class AddressTable extends React.Component{
 
         return(
             <React.Fragment>
+                <Card>
+                    <CardHeader title=""/>
+                    <CardContent>
                 <Grid item xs={12}>
                     <MaterialTable
                         title={"Addresses"}
@@ -115,6 +121,8 @@ class AddressTable extends React.Component{
                           ]}
                     />
                 </Grid>
+                </CardContent>
+                </Card>
                 <AddressModal />
             </React.Fragment>
         )

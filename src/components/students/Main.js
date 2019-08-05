@@ -152,9 +152,6 @@ class Main extends React.Component
                
                     </CardContent>
                 </Card>
-                
-                    
-            
                </React.Fragment>
         );
     }
