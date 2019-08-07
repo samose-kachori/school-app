@@ -3,9 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import MaterialTable from 'material-table';
-import Paper from '@material-ui/core/Paper';
 import { forwardRef } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import Check from '@material-ui/icons/Check';
@@ -23,10 +21,8 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import RowActions from '../rowActions/RowActions';
-import MTableToolbar from 'material-table';
-import Chip from '@material-ui/core/Chip';
 import PropTypes from 'prop-types';
-import {fade, withStyles } from '@material-ui/core/styles';
+import {withStyles } from '@material-ui/core/styles';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -120,7 +116,6 @@ class Main extends React.Component
     };
 
     render() {
-        const { classes } = this.props;
         return (
             <React.Fragment>
                 <Card>
@@ -145,15 +140,18 @@ class Main extends React.Component
                               tooltip: 'Refresh Data',
                               isFreeAction: true,
                               onClick: () => {alert('You should develop a code to export');},
-                            }
+                            },
+                            {
+                                icon: 'add',
+                                tooltip: 'add',
+                                isFreeAction: true,
+                                onClick: () => {alert('You should develop a code to export');},
+                              }
                           ]}
                     />
                
                     </CardContent>
                 </Card>
-                
-                    
-            
                </React.Fragment>
         );
     }

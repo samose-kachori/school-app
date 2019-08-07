@@ -1,8 +1,6 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import DashboardIcon from '@material-ui/icons/TableChartRounded';
 import ActionIcon from '@material-ui/icons/SettingsRounded';
 
 export default function RowActions() {

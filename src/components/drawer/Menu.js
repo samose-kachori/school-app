@@ -13,7 +13,6 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -34,7 +33,7 @@ import MenuCore from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
-import SchoolTabs from '../students/CenteredTabs';
+
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -42,19 +41,6 @@ import {
   drawerOpen,
   drawerClose,
 } from '../../actions/DrawerActions';
-
-
-function MadeWithLove() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Built with love by the '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Material-UI
-      </Link>
-      {' team.'}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -94,7 +80,7 @@ const styles = (theme) => ({
     display: 'none',
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 0,
   },
   drawerPaper: {
     position: 'relative',
@@ -135,7 +121,7 @@ const styles = (theme) => ({
   fixedHeight: {
     height: 240,
   },
-  
+
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -170,6 +156,21 @@ const styles = (theme) => ({
     [theme.breakpoints.up('md')]: {
       width: 200,
     },
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    },
+  },
+  sectionMobile: {
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  grow: {
+    flexGrow: 1,
   },
 });
 
@@ -225,30 +226,6 @@ class Menu extends React.Component {
   
   renderTabs = (show) => {
     switch(show){
-      case 'students':
-        return (<SchoolTabs/>);
-      default:
-        return (<div></div>);
-    }
-  }
-
-  renderMenu = (show) => {
-    switch(show){
-      case 'students':
-          return (
-            <MenuCore
-          anchorEl={this.state.anchorEl}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          id={this.state.menuId}
-          keepMounted
-          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-          open={Boolean(this.state.anchorEl)}
-          onClose={this.handleMenuClose}
-        >
-          <MenuItem onClick={this.handleMenuClose}>Enroll</MenuItem>
-          <MenuItem onClick={this.handleMenuClose}>Terminate</MenuItem>
-        </MenuCore>
-          );
       default:
         return (<div></div>);
     }
@@ -298,11 +275,6 @@ render(){
             {drawerTitle}
           </Typography>
           {this.renderTabs(show)}
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="Show 4 new mails" color="inherit">
@@ -328,7 +300,6 @@ render(){
           </div>
         </Toolbar>
       </AppBar>
-      {this.renderMenu(show)}
       <Drawer
         variant="permanent"
         classes={{
@@ -349,7 +320,7 @@ render(){
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         {this.renderSwitch(show)}
-        {/*<MadeWithLove />*/}
+          {/*<MadeWithLove />*/}
       </main>
     </div>
   );

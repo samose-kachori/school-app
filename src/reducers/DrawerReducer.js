@@ -9,7 +9,7 @@ import {
     SELECT_LIBRARY,
     DRAWER_OPEN,
     DRAWER_CLOSE
-} from "../types/DrawerTypes";
+} from '../types/DrawerTypes';
 
 const initialState = {
     show:'dashboard',

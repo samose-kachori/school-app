@@ -27,10 +27,6 @@ import {
 
 
 class MainListItems extends React.Component {
-  constructor(props){
-    super(props);
-  }
-
   render(){
     return (
       <div>
