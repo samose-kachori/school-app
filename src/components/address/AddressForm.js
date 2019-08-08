@@ -9,7 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {
-    addAddress
+    addAddress,
+    closeAddressForm
 } from '../../actions/AddressActions';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -70,6 +71,11 @@ class AddressForm extends React.Component{
     render(){
         const {open} = this.props;
 
+        const handleCancel = () => {
+            const {dispatch} = this.props;
+            dispatch(closeAddressForm());
+        }
+        
         const handleAdd = () => {
             console.log('add');
             const {dispatch} = this.props;
@@ -185,6 +191,9 @@ class AddressForm extends React.Component{
                     <DialogActions>
                         <Button onClick={handleAdd} color="primary">
                             Save
+                        </Button>
+                        <Button onClick={handleCancel} color="primary">
+                            Cancel
                         </Button>
                     </DialogActions>
                 </Dialog>

@@ -67,6 +67,12 @@ class EmailTable extends React.Component{
                         columns={columns}
                         data={data}
                         icons={tableIcons}
+                        options={
+                            {
+                                pageSize:2,
+                                pageSizeOptions: [2, 5, 10, 20]
+                            }
+                        }
                         actions={[
                             {
                               icon: 'refresh',

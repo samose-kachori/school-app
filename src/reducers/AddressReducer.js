@@ -1,7 +1,8 @@
 import {
     ADD_ADDRESS,
     EDIT_ADDRESS,
-    OPEN_ADDRESS_FORM
+    OPEN_ADDRESS_FORM,
+    CLOSE_ADDRESS_FORM
 } from '../types/AddressTypes';
 
 const initialState = {
@@ -16,6 +17,11 @@ export default function AddressReducer (state = initialState, action){
             return {
                 ...state, 
                 open: true
+            };
+        case CLOSE_ADDRESS_FORM:
+            return {
+                ...state, 
+                open: false
             };
         case EDIT_ADDRESS:
             return {

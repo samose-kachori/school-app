@@ -9,7 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {
-    addPhone
+    addPhone,
+    closePhoneForm
 } from '../../../actions/PhoneActions';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -21,19 +22,10 @@ class PhoneForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            open:false,
             phoneType:'',
             phone:'',
         }
     }
-
-    handleOnClose = () => {
-        this.setState(
-            {
-                open:false
-            }
-        )
-    } 
 
     handlePhoneTypeChange = (event) => {
         console.log(event.target.value);
@@ -49,9 +41,14 @@ class PhoneForm extends React.Component{
         const handleAdd = () => {
             console.log('add');
             const {dispatch} = this.props;
-            const phoneType = 'home';
+            const phoneType = this.state.phoneType;
             const phone = this.state.phone;
             dispatch(addPhone(phoneType, phone));
+        }
+
+        const handleCancel = () => {
+            const {dispatch} = this.props;
+            dispatch(closePhoneForm());
         }
 
         const handleChange = (event) => {
@@ -66,7 +63,7 @@ class PhoneForm extends React.Component{
 
         return (
             <React.Fragment>
-                <Dialog open={open} onClose={this.handleOnClose}>
+                <Dialog open={open}>
                     <DialogTitle>Add Phone</DialogTitle>
                     <DialogContent>
                         <Grid container>
@@ -105,6 +102,9 @@ class PhoneForm extends React.Component{
                     <DialogActions>
                         <Button onClick={handleAdd} color="primary">
                             Save
+                        </Button>
+                        <Button onClick={handleCancel} color="primary">
+                            Cancel
                         </Button>
                     </DialogActions>
                 </Dialog>
