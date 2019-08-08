@@ -21,6 +21,7 @@ export default function AddressReducer (state = initialState, action){
             return {
                 ...state,
                 open: action.payload.open,
+                addressType: action.payload.addressType,
                 addressLine1: action.payload.addressLine1,
                 addressLine2: action.payload.addressLine2,
                 city: action.payload.city,
@@ -35,6 +36,7 @@ export default function AddressReducer (state = initialState, action){
                 data: [
                     ...state.data,
                     {
+                        addressType: action.payload.addressType,
                         addressLine1: action.payload.addressLine1,
                         addressLine2: action.payload.addressLine2,
                         city: action.payload.city,

@@ -24,9 +24,6 @@ import {
     openPhoneForm
 } from '../../../actions/PhoneActions';
 import {connect} from 'react-redux';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),

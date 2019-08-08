@@ -29,8 +29,6 @@ import Cafeteria from '../cafeteria/Cafeteria';
 import Transport from '../transport/Transport';
 import Reports from '../reports/Reports';
 import Dashboard from '../dashboard/Dashboard';
-import MenuCore from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 
