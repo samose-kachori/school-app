@@ -18,7 +18,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import PhoneForm from './PhoneForm';
-import RowActions from '../../rowActions/RowActions';
+import PhoneRowActions from '../../rowActions/PhoneRowActions';
 import PropTypes from 'prop-types';
 import {
     openPhoneForm
@@ -46,7 +46,7 @@ const tableIcons = {
 };
 
 const columns = [
-    { title: 'Actions', field: 'actions', render: rowData=><RowActions rowData/>, sorting:false},
+    { title: 'Actions', field: 'actions', render: rowData=><PhoneRowActions rowData/>, sorting:false},
     { title: 'Type', field: 'phoneType', type:'string'},
     { title: 'Phone', field: 'phone', type:'string'},
 ];

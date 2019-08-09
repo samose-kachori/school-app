@@ -22,8 +22,8 @@ class EmailForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            emailType:'',
-            email:'',
+            emailType: props.emailType,
+            email: props.email,
         }
     }
 
@@ -93,6 +93,7 @@ class EmailForm extends React.Component{
                                     name="email"
                                     label="Email"
                                     fullWidth
+                                    value={this.state.email}
                                     autoComplete="email"
                                 />
                             </Grid>

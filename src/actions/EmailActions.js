@@ -34,3 +34,15 @@ export const addEmail = (emailType,
         }
     }
 }
+
+export const editEmail = (emailType, 
+    email) => {
+    return {
+        type: EDIT_EMAIL,
+        payload: {
+            emailType,
+            email,
+            open: true 
+        }
+    }
+}

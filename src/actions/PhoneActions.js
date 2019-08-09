@@ -34,3 +34,15 @@ export const addPhone = (phoneType,
         }
     }
 }
+
+export const editPhone = (phoneType, 
+    phone) => {
+    return {
+        type: EDIT_PHONE,
+        payload: {
+            phoneType,
+            phone,
+            open: true 
+        }
+    }
+}

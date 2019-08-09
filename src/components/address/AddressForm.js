@@ -23,13 +23,13 @@ class AddressForm extends React.Component{
         super(props);
         this.state = {
             open:false,
-            addressType:'',
-            addressLine1:'',
-            addressLine2:'',
-            city:'',
-            state:'',
-            country:'',
-            zip:''
+            addressType: props.addressType,
+            addressLine1: props.addressLine1,
+            addressLine2: props.addressLine2,
+            city: props.city,
+            state: props.state,
+            country: props.country,
+            zip: props.zip
         }
     }
 
@@ -130,6 +130,7 @@ class AddressForm extends React.Component{
                                     id="addressLine1"
                                     name="addressLine1"
                                     label="Address line 1"
+                                    value={this.state.addressLine1}
                                     fullWidth
                                     autoComplete="billing address-line1"
                                 />
@@ -140,6 +141,7 @@ class AddressForm extends React.Component{
                                     onChange={this.handleAddressLine2Change}
                                     name="addressLine2"
                                     label="Address line 2"
+                                    value={this.state.addressLine2}
                                     fullWidth
                                     autoComplete="billing address-line2"
                                 />
@@ -151,6 +153,7 @@ class AddressForm extends React.Component{
                                     onChange={this.handleCityChange}
                                     name="city"
                                     label="City"
+                                    value={this.state.city}
                                     fullWidth
                                     autoComplete="billing address-level2"
                                 />
@@ -161,6 +164,7 @@ class AddressForm extends React.Component{
                                     onChange={this.handleStateChange}
                                     name="state"
                                     label="State/Province/Region"
+                                    value={this.state.state}
                                     fullWidth
                                 />
                             </Grid>
@@ -172,6 +176,7 @@ class AddressForm extends React.Component{
                                     name="zip"
                                     label="Zip / Postal code"
                                     fullWidth
+                                    value={this.state.zip}
                                     autoComplete="billing postal-code"
                                 />
                             </Grid>
@@ -182,6 +187,7 @@ class AddressForm extends React.Component{
                                     onChange={this.handleCountryChange}
                                     name="country"
                                     label="Country"
+                                    value={this.state.country}
                                     fullWidth
                                     autoComplete="billing country"
                                 />

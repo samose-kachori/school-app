@@ -22,8 +22,8 @@ class PhoneForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            phoneType:'',
-            phone:'',
+            phoneType: props.phoneType,
+            phone: props.phone,
         }
     }
 
@@ -93,6 +93,7 @@ class PhoneForm extends React.Component{
                                     onChange={this.handlePhoneChange}
                                     name="phone"
                                     label="Phone"
+                                    value={this.state.phone}
                                     fullWidth
                                     autoComplete="phone"
                                 />

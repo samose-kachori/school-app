@@ -18,7 +18,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import AddressForm from './AddressForm';
-import RowActions from '../rowActions/RowActions';
+import AddressRowActions from '../rowActions/AddressRowActions';
 import PropTypes from 'prop-types';
 import {
     openAddressForm
@@ -49,7 +49,7 @@ const tableIcons = {
 };
 
 const columns = [
-    { title: 'Actions', field: 'actions', render: rowData=><RowActions rowData/>, sorting:false},
+    { title: 'Actions', field: 'actions', render: rowData=><AddressRowActions rowData={rowData}/>, sorting:false},
     { title: 'Address Type', field: 'addressType', type:'string'},
     { title: 'Address', field: 'address', type:'string'},
     { title: 'Country', field: 'country', type:'string'},
