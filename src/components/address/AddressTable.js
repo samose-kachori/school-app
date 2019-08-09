@@ -17,8 +17,8 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import AddressModal from './AddressModal';
-import RowActions from '../rowActions/RowActions';
+import AddressForm from './AddressForm';
+import AddressRowActions from '../rowActions/AddressRowActions';
 import PropTypes from 'prop-types';
 import {
     openAddressForm
@@ -49,23 +49,10 @@ const tableIcons = {
 };
 
 const columns = [
-    { title: 'Actions', field: 'actions', render: rowData=><RowActions rowData/>, sorting:false},
+    { title: 'Actions', field: 'actions', render: rowData=><AddressRowActions rowData={rowData}/>, sorting:false},
     { title: 'Address Type', field: 'addressType', type:'string'},
     { title: 'Address', field: 'address', type:'string'},
     { title: 'Country', field: 'country', type:'string'},
-];
-
-const data =  [
-    {
-        addressType: 'home',
-        address: '146 Sussex St., Apt#1, Jersey City, NJ 07302',
-        country: 'United States'
-    },
-    {
-        addressType: 'home',
-        address: '148 Sussex St., Apt#1, Jersey City, NJ 07302',
-        country: 'United States'
-    },
 ];
 
 class AddressTable extends React.Component{
@@ -75,14 +62,13 @@ class AddressTable extends React.Component{
         function getAddresses(){
             let addressList = [];
             data.forEach(function(element) {
-                const address = element.addressLine1+','
-                +element.city+','
-                +element.state+','
+                const address = element.addressLine1+', '
+                +element.city+', '
+                +element.state+'-'
                 +element.zip;
                 addressList.push( 
                     {
                         ...element,
-                        addressType: 'Home',
                         address
                     }
                 );
@@ -98,32 +84,38 @@ class AddressTable extends React.Component{
             <React.Fragment>
                 <Card>
                     <CardHeader title=""/>
-                    <CardContent>
-                <Grid item xs={12}>
-                    <MaterialTable
-                        title={"Addresses"}
-                        columns={columns}
-                        data={getAddresses()}
-                        icons={tableIcons}
-                        actions={[
-                            {
-                              icon: 'refresh',
-                              tooltip: 'Refresh Data',
-                              isFreeAction: true,
-                              onClick: () => {alert('You should develop a code to export');},
-                            },
-                            {
-                                icon: 'add',
-                                tooltip: 'add',
-                                isFreeAction: true,
-                                onClick: () => {handleAddClick()},
-                              }
-                          ]}
-                    />
-                </Grid>
-                </CardContent>
-                </Card>
-                <AddressModal />
+                        <CardContent>
+                            <Grid item xs={12}>
+                                <MaterialTable
+                                    title={"Addresses"}
+                                    columns={columns}
+                                    data={getAddresses()}
+                                    icons={tableIcons}
+                                    options={
+                                        {
+                                            pageSize:2,
+                                            pageSizeOptions: [2, 5, 10, 20]
+                                        }
+                                    }
+                                    actions={[
+                                        {
+                                        icon: 'refresh',
+                                        tooltip: 'Refresh Data',
+                                        isFreeAction: true,
+                                        onClick: () => {alert('You should develop a code to export');},
+                                        },
+                                        {
+                                            icon: 'add',
+                                            tooltip: 'add',
+                                            isFreeAction: true,
+                                            onClick: () => {handleAddClick()},
+                                        }
+                                    ]}
+                                />
+                            </Grid>
+                        </CardContent>
+                    </Card>
+                <AddressForm />
             </React.Fragment>
         )
     }

@@ -1,9 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,33 +10,15 @@ import Grid from '@material-ui/core/Grid';
 import {
   selectAction
 } from '../../actions/StudentsActions';
-import {withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { bindActionCreators } from 'redux';
 import AppBar from '@material-ui/core/AppBar';
 
-const styles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-  rootList: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
 
 export class SimpleExpansionPanel extends React.Component {
-  constructor(props){
-    super(props);
-  }
   
   render(){
-    const { dispatch, selectedAction } = this.props;
+    const { selectedAction } = this.props;
     const handleListItemClick = (event, action) => {
       selectAction(action, this.props);
     }

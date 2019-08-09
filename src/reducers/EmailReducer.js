@@ -1,7 +1,8 @@
 import {
     ADD_EMAIL,
     EDIT_EMAIL,
-    OPEN_EMAIL_FORM
+    OPEN_EMAIL_FORM,
+    CLOSE_EMAIL_FORM
 } from '../types/EmailTypes';
 
 const initialState = {
@@ -16,6 +17,11 @@ export default function EmailReducer (state = initialState, action){
             return {
                 ...state, 
                 open: true
+            };
+        case CLOSE_EMAIL_FORM:
+            return {
+                ...state, 
+                open: false
             };
         case EDIT_EMAIL:
             return {

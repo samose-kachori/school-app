@@ -18,15 +18,12 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import PhoneForm from './PhoneForm';
-import RowActions from '../../rowActions/RowActions';
+import PhoneRowActions from '../../rowActions/PhoneRowActions';
 import PropTypes from 'prop-types';
 import {
     openPhoneForm
 } from '../../../actions/PhoneActions';
 import {connect} from 'react-redux';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -49,7 +46,7 @@ const tableIcons = {
 };
 
 const columns = [
-    { title: 'Actions', field: 'actions', render: rowData=><RowActions rowData/>, sorting:false},
+    { title: 'Actions', field: 'actions', render: rowData=><PhoneRowActions rowData/>, sorting:false},
     { title: 'Type', field: 'phoneType', type:'string'},
     { title: 'Phone', field: 'phone', type:'string'},
 ];
@@ -71,6 +68,12 @@ class PhoneTable extends React.Component{
                         columns={columns}
                         data={data}
                         icons={tableIcons}
+                        options={
+                            {
+                                pageSize:2,
+                                pageSizeOptions: [2, 5, 10, 20]
+                            }
+                        }
                         actions={[
                             {
                               icon: 'refresh',

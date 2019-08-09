@@ -1,7 +1,8 @@
 import {
     ADD_PHONE,
     EDIT_PHONE,
-    OPEN_PHONE_FORM
+    OPEN_PHONE_FORM,
+    CLOSE_PHONE_FORM
 } from '../types/PhoneTypes';
 
 const initialState = {
@@ -16,6 +17,11 @@ export default function PhoneReducer (state = initialState, action){
             return {
                 ...state, 
                 open: true
+            };
+        case CLOSE_PHONE_FORM:
+            return {
+                ...state, 
+                open: false
             };
         case EDIT_PHONE:
             return {

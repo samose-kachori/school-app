@@ -18,15 +18,12 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import EmailForm from './EmailForm';
-import RowActions from '../../rowActions/RowActions';
+import EmailRowActions from '../../rowActions/EmailRowActions';
 import PropTypes from 'prop-types';
 import {
     openEmailForm
 } from '../../../actions/EmailActions';
 import {connect} from 'react-redux';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -49,7 +46,7 @@ const tableIcons = {
 };
 
 const columns = [
-    { title: 'Actions', field: 'actions', render: rowData=><RowActions rowData/>, sorting:false},
+    { title: 'Actions', field: 'actions', render: rowData=><EmailRowActions rowData={rowData}/>, sorting:false},
     { title: 'Type', field: 'emailType', type:'string'},
     { title: 'Email', field: 'email', type:'string'},
 ];
@@ -70,6 +67,12 @@ class EmailTable extends React.Component{
                         columns={columns}
                         data={data}
                         icons={tableIcons}
+                        options={
+                            {
+                                pageSize:2,
+                                pageSizeOptions: [2, 5, 10, 20]
+                            }
+                        }
                         actions={[
                             {
                               icon: 'refresh',

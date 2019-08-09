@@ -1,17 +1,16 @@
 import React from 'react';
-import Modal from '@material-ui/core/Modal';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {
-    addEmail
+    addEmail,
+    closeEmailForm
 } from '../../../actions/EmailActions';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -23,19 +22,10 @@ class EmailForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            open:false,
-            emailType:'',
-            email:'',
+            emailType: props.emailType,
+            email: props.email,
         }
     }
-
-    handleOnClose = () => {
-        this.setState(
-            {
-                open:false
-            }
-        )
-    } 
 
     handleEmailTypeChange = (event) => {
         console.log(event.target.value);
@@ -56,6 +46,11 @@ class EmailForm extends React.Component{
             dispatch(addEmail(emailType, email));
         }
 
+        const handleCancel = () => {
+            const {dispatch} = this.props;
+            dispatch(closeEmailForm());
+        }
+
         const handleChange = (event) => {
             console.log(event.target.name);
             console.log(event.target.value);
@@ -67,7 +62,7 @@ class EmailForm extends React.Component{
         const {open} = this.props;
         return (
             <React.Fragment>
-                <Dialog open={open} onClose={this.handleOnClose}>
+                <Dialog open={open}>
                     <DialogTitle>Add Email</DialogTitle>
                     <DialogContent>
                         <Grid container>
@@ -98,6 +93,7 @@ class EmailForm extends React.Component{
                                     name="email"
                                     label="Email"
                                     fullWidth
+                                    value={this.state.email}
                                     autoComplete="email"
                                 />
                             </Grid>
@@ -106,6 +102,9 @@ class EmailForm extends React.Component{
                     <DialogActions>
                         <Button onClick={handleAdd} color="primary">
                             Save
+                        </Button>
+                        <Button onClick={handleCancel} color="primary">
+                            Cancel
                         </Button>
                     </DialogActions>
                 </Dialog>

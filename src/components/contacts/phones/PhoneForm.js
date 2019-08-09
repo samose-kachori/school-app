@@ -1,17 +1,16 @@
 import React from 'react';
-import Modal from '@material-ui/core/Modal';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {
-    addPhone
+    addPhone,
+    closePhoneForm
 } from '../../../actions/PhoneActions';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -23,19 +22,10 @@ class PhoneForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            open:false,
-            phoneType:'',
-            phone:'',
+            phoneType: props.phoneType,
+            phone: props.phone,
         }
     }
-
-    handleOnClose = () => {
-        this.setState(
-            {
-                open:false
-            }
-        )
-    } 
 
     handlePhoneTypeChange = (event) => {
         console.log(event.target.value);
@@ -51,9 +41,14 @@ class PhoneForm extends React.Component{
         const handleAdd = () => {
             console.log('add');
             const {dispatch} = this.props;
-            const phoneType = 'home';
+            const phoneType = this.state.phoneType;
             const phone = this.state.phone;
             dispatch(addPhone(phoneType, phone));
+        }
+
+        const handleCancel = () => {
+            const {dispatch} = this.props;
+            dispatch(closePhoneForm());
         }
 
         const handleChange = (event) => {
@@ -68,7 +63,7 @@ class PhoneForm extends React.Component{
 
         return (
             <React.Fragment>
-                <Dialog open={open} onClose={this.handleOnClose}>
+                <Dialog open={open}>
                     <DialogTitle>Add Phone</DialogTitle>
                     <DialogContent>
                         <Grid container>
@@ -98,6 +93,7 @@ class PhoneForm extends React.Component{
                                     onChange={this.handlePhoneChange}
                                     name="phone"
                                     label="Phone"
+                                    value={this.state.phone}
                                     fullWidth
                                     autoComplete="phone"
                                 />
@@ -107,6 +103,9 @@ class PhoneForm extends React.Component{
                     <DialogActions>
                         <Button onClick={handleAdd} color="primary">
                             Save
+                        </Button>
+                        <Button onClick={handleCancel} color="primary">
+                            Cancel
                         </Button>
                     </DialogActions>
                 </Dialog>
